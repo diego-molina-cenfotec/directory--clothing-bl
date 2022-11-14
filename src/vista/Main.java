@@ -1,13 +1,12 @@
 package vista;
 
+import controlador.ControladorCamiseta;
 import controlador.ControladorCliente;
+import controlador.ControladorCamiseta;
 import modelo.Cliente;
+import modelo.Camiseta;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.lang.reflect.Array;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
@@ -56,10 +55,10 @@ public class Main {
                 listarClientes();
                 break;
             case 3:
-                mostrarTexto("Escogio la opcion 3 Registrar camiseta");
+                registrarCamiseta();
                 break;
             case 4:
-                mostrarTexto("Escogio la opcion 4 Listar camisetasr");
+                listarCamisetas();
                 break;
             case 5:
                 mostrarTexto("Escogio la opcion 5 Registrar catalogo");
@@ -73,17 +72,32 @@ public class Main {
         }
     } // fin de procesar opcion
 
-    static void registrarCliente () throws IOException{
+    static void registrarCliente (){
         mostrarTexto("Escogió la opción 1 Registrar cliente");
         String resultado = ControladorCliente.registrarCliente("6", "diego", "molina",
                 "trejos","heredia", "dimotre@dimotre.com");
         mostrarTexto(resultado);
-    }
-
+    }// fin de resgistrarCliente
     static void listarClientes(){
         ArrayList<Cliente> dataCliente = ControladorCliente.listarClientes();
         for (Cliente info: dataCliente) {
             mostrarTexto(info.toString());
         }
+    }// fin listarCliente
+
+    static void registrarCamiseta(){
+        mostrarTexto("va crear y guardar una camiseta");
+        String resultado = ControladorCamiseta.registrarCamiseta("1","#FFFFFF",'L',"gatitos",15000 );
+        mostrarTexto(resultado);
     }
+
+    static void listarCamisetas(){
+        ArrayList<Camiseta> dataCamiseta = ControladorCamiseta.listarCamisetas();
+        for (Camiseta info: dataCamiseta
+             ) {
+            mostrarTexto(info.toString());
+        }
+    }
+
+
 }// fin clase Main

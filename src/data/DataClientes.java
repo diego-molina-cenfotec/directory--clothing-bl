@@ -16,14 +16,10 @@ public class DataClientes {
             listaClientes = new ArrayList<Cliente>();
         }
         listaClientes.add(cliente);
-        return "Cliente guardo";
+        return "Cliente guardado";
     }
 
     public ArrayList<Cliente> verClientes(){
-        /*ArrayList<String> infoClientes = new ArrayList<>();
-        for (Object c : listaClientes) {
-            infoClientes.add(c.toString());
-        }*/
         return listaClientes;
     }
 
