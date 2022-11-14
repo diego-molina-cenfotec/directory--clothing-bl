@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Cliente {
     private String id;
-    private String nomber;
+    private String nombre;
     private String primerApellido;
     private String segundoApellido;
     private String direccion;
@@ -15,9 +15,9 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String id, String nomber, String primerApellido, String segundoApellido, String direccion, String email) {
+    public Cliente(String id, String nombre, String primerApellido, String segundoApellido, String direccion, String email) {
         this.id = id;
-        this.nomber = nomber;
+        this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.direccion = direccion;
@@ -33,11 +33,11 @@ public class Cliente {
     }
 
     public String getNomber() {
-        return nomber;
+        return nombre;
     }
 
     public void setNomber(String nomber) {
-        this.nomber = nomber;
+        this.nombre = nomber;
     }
 
     public String getPrimerApellido() {
@@ -84,7 +84,7 @@ public class Cliente {
     public String toString() {
         return "Cliente{" +
                 "id='" + id + '\'' +
-                ", nomber='" + nomber + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", primerApellido='" + primerApellido + '\'' +
                 ", segundoApellido='" + segundoApellido + '\'' +
                 ", direccion='" + direccion + '\'' +

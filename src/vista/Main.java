@@ -1,9 +1,14 @@
 package vista;
 
+import controlador.ControladorCliente;
+import modelo.Cliente;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Main {
     // variables globales
@@ -45,10 +50,10 @@ public class Main {
                 mostrarTexto("Adios, vuelva pronto");
                 break;
             case 1:
-                mostrarTexto("Escogio la opcion 1 Registrar cliente");
+                registrarCliente();
                 break;
             case 2:
-                mostrarTexto("Escogio la opcion 2 Listar clientes");
+                listarClientes();
                 break;
             case 3:
                 mostrarTexto("Escogio la opcion 3 Registrar camiseta");
@@ -67,4 +72,18 @@ public class Main {
                 break;
         }
     } // fin de procesar opcion
+
+    static void registrarCliente () throws IOException{
+        mostrarTexto("Escogió la opción 1 Registrar cliente");
+        String resultado = ControladorCliente.registrarCliente("6", "diego", "molina",
+                "trejos","heredia", "dimotre@dimotre.com");
+        mostrarTexto(resultado);
+    }
+
+    static void listarClientes(){
+        ArrayList<Cliente> dataCliente = ControladorCliente.listarClientes();
+        for (Cliente info: dataCliente) {
+            mostrarTexto(info.toString());
+        }
+    }
 }// fin clase Main
