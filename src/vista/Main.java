@@ -1,13 +1,18 @@
 package vista;
 
+import controlador.ControladorCamiseta;
+import controlador.ControladorCatalogo;
 import controlador.ControladorCliente;
+import controlador.ControladorCamiseta;
+import data.DataCatalogo;
+import modelo.Catalogo;
 import modelo.Cliente;
+import modelo.Camiseta;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.lang.reflect.Array;
+import javax.xml.catalog.Catalog;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Main {
@@ -38,6 +43,7 @@ public class Main {
         mostrarTexto("4. Listar camisetas");
         mostrarTexto("5. Registrar catalogo");
         mostrarTexto("6. Listar catalogos");
+        mostrarTexto("7. Incluir Camiseta");
         mostrarTexto("0. Salir del programa");
     }// fin de mostrar menu
     static int seleccionarOpcion() throws IOException{
@@ -56,16 +62,19 @@ public class Main {
                 listarClientes();
                 break;
             case 3:
-                mostrarTexto("Escogio la opcion 3 Registrar camiseta");
+                registrarCamiseta();
                 break;
             case 4:
-                mostrarTexto("Escogio la opcion 4 Listar camisetasr");
+                listarCamisetas();
                 break;
             case 5:
-                mostrarTexto("Escogio la opcion 5 Registrar catalogo");
+                registarCatalogo();
                 break;
             case 6:
-                mostrarTexto("Escogio la opcion 6 Listar catalogos");
+                listarCatalogos();
+                break;
+            case 7:
+                incluirCamiseta();
                 break;
             default:
                 mostrarTexto("Opcion invalida por favor confirme la opcion deseada");
@@ -73,17 +82,66 @@ public class Main {
         }
     } // fin de procesar opcion
 
-    static void registrarCliente () throws IOException{
+    static void registrarCliente (){
         mostrarTexto("Escogió la opción 1 Registrar cliente");
         String resultado = ControladorCliente.registrarCliente("6", "diego", "molina",
                 "trejos","heredia", "dimotre@dimotre.com");
         mostrarTexto(resultado);
-    }
-
+    }// fin de resgistrarCliente
     static void listarClientes(){
         ArrayList<Cliente> dataCliente = ControladorCliente.listarClientes();
         for (Cliente info: dataCliente) {
             mostrarTexto(info.toString());
         }
+    }// fin listarCliente
+
+    static void registrarCamiseta(){
+        mostrarTexto("va crear y guardar una camiseta");
+        String resultado = ControladorCamiseta.registrarCamiseta("1","#FFFFFF",'L',"gatitos",15000 );
+        mostrarTexto(resultado);
     }
+
+    static void listarCamisetas(){
+        ArrayList<Camiseta> dataCamiseta = ControladorCamiseta.listarCamisetas();
+        int numCamiseta;
+        for (Camiseta info: dataCamiseta) {
+            numCamiseta = dataCamiseta.indexOf(info)+1;
+            mostrarTexto(numCamiseta +"=>"+  info.toString());
+        }
+    }
+    static void registarCatalogo() {
+        mostrarTexto("Va a crear un catalogo");
+        LocalDate hoy = LocalDate.now();
+        DateTimeFormatter formaFecha = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String fechaCreacion = hoy.format(formaFecha);
+        String anio = Integer.toString(hoy.getYear());
+        String mes = hoy.getMonth().toString();
+        String nombreCatalogo = mes+anio;
+        mostrarTexto(fechaCreacion);
+        mostrarTexto(nombreCatalogo);
+        String resultado = ControladorCatalogo.registrarCatalogo(nombreCatalogo, fechaCreacion );
+        mostrarTexto(resultado);
+    }
+
+    static void listarCatalogos(){
+        ArrayList<Catalogo> dataCatalogos = ControladorCatalogo.listarCatalogos();
+        int numCatalogo;
+        for (Catalogo info : dataCatalogos) {
+            numCatalogo = dataCatalogos.indexOf(info)+1;
+            mostrarTexto(numCatalogo +"=>"+ info.toString());
+        }
+    }
+
+    private static void incluirCamiseta() throws IOException {
+        listarCatalogos();
+        mostrarTexto("ingrese numero de catalogo a modificar");
+        int numCatalogo = Integer.parseInt(leerTexto());
+        listarCamisetas();
+        mostrarTexto("ingrese numero de camiseta");
+        int numCamiseta = Integer.parseInt(leerTexto());
+        mostrarTexto(ControladorCatalogo.incluirCamiseta(numCatalogo, numCamiseta));
+    }
+
+
+
 }// fin clase Main
